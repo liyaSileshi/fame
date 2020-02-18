@@ -1,0 +1,13 @@
+.PageHeader {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1em;
+    background-color: rgb(19, 99, 99);
+    color: #fff;
+  }
+
+  .PageHeader h1{
+      font-size: 4em;
+  }
+  
