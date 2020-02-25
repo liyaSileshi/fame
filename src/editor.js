@@ -13,52 +13,26 @@ class Editor extends Component {
     }
 
     render() {
-      const bill = parseFloat(this.state.bill)
-      const tipPercent = parseInt(this.state.tipPercent)
-      const tip = bill * tipPercent / 100
-      const total = bill + tip
+    //   const bill = parseFloat(this.state.bill)
+    //   const tipPercent = parseInt(this.state.tipPercent)
+    //   const tip = bill * tipPercent / 100
+    //   const total = bill + tip
 
       const filterStyle = {
-        filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur})`
+        filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px)`
       }
 
       return (
         <div style={styles.container}>
-          <span style={styles.output}>{total}</span>
-          <span style={styles.output}>{tip}</span>
-
-          <label for="input-bill">Bill</label>
-          <input 
-            style={styles.input}
-            id="input-bill"
-            type="text" 
-            value={this.state.bill}
-            onChange={(e) => {
-              // this.state.bill = e.target.value // <- BAD! DON'T Do this!
-              this.setState({ bill: e.target.value })
-            }}
-          />
-
-          <label for="input-tip-percent">Tip %</label>
-          <input 
-            style={styles.input}
-            id="input-tip-percent"
-            type="text"
-            value={this.state.tipPercent}
-            onChange={(e) => {
-              this.setState({ tipPercent: e.target.value })
-            }}
-          />
-
           <img 
-            src='public/images/2C.png'
-            width="100"
-            height="100"
+            src='images/2C.png'
+            width="500"
+            height="auto"
             style={filterStyle}
             alt='enteredimg'
           />
 
-          <span>{this.state.hue}</span>
+          <span>Hue: {this.state.hue}</span>
           <input 
             min="0"
             max="360"
@@ -68,13 +42,13 @@ class Editor extends Component {
               this.setState({ hue: e.target.value })
             }}
           />
-          <span>{this.state.blur}</span>
+          <span>Blur: {this.state.blur}</span>
           <input 
             min="0"
             max="360"
             type="range"
             value={this.state.blur}
-            onChange={(e) =>{
+            onChange={(e) => {
               this.setState({ blur: e.target.value })
             }}
           />
