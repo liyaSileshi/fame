@@ -5,10 +5,10 @@ function PageHeader() {
     return (
         <div className='PageHeader'>
             <h1>
-                Fame Contest
+                Image Editor
             </h1>
         </div>
     )
 }
 
-export default PageHeader
+export default PageHeader;
