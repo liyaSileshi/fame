@@ -5,27 +5,23 @@ class Editor extends Component {
       super(props)
 
       this.state = {
-        bill: 36,
-        tipPercent: 15,
         hue: 0, 
-        blur: 0
+        blur: 0,
+        grayscale: 0,
+        contrast: 100,
+        opacity: 100
       }
     }
 
     render() {
-    //   const bill = parseFloat(this.state.bill)
-    //   const tipPercent = parseInt(this.state.tipPercent)
-    //   const tip = bill * tipPercent / 100
-    //   const total = bill + tip
-
       const filterStyle = {
-        filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px)`
+        filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px) grayscale(${this.state.grayscale}%) contrast(${this.state.contrast}%)`
       }
 
       return (
         <div style={styles.container}>
           <img 
-            src='images/2C.png'
+            src='images/liya.jpeg'
             width="500"
             height="auto"
             style={filterStyle}
@@ -42,16 +38,51 @@ class Editor extends Component {
               this.setState({ hue: e.target.value })
             }}
           />
+
           <span>Blur: {this.state.blur}</span>
           <input 
             min="0"
-            max="360"
+            max="10"
             type="range"
             value={this.state.blur}
             onChange={(e) => {
               this.setState({ blur: e.target.value })
             }}
           />
+
+          <span>Grayscale: {this.state.grayscale}</span>
+          <input 
+            min="0"
+            max="100"
+            type="range"
+            value={this.state.grayscale}
+            onChange={(e) => {
+              this.setState({ grayscale: e.target.value })
+            }}
+          />
+
+          <span>Contrast: {this.state.contrast}</span>
+          <input 
+            min="0"
+            max="200"
+            type="range"
+            value={this.state.contrast}
+            onChange={(e) => {
+              this.setState({ contrast: e.target.value })
+            }}
+          />
+
+          <span>Opacity: {this.state.opacity}</span>
+          <input 
+            min="0"
+            max="100"
+            type="range"
+            value={this.state.opacity}
+            onChange={(e) => {
+              this.setState({ opacity: e.target.value })
+            }}
+          />
+
         </div>
       )
     }
