@@ -2,7 +2,7 @@
 
 Real time image editor
 
-Live link: 🔗 
+Live link: 🔗 https://liyasileshi.github.io/fame/
 
 
 ### Prerequisites
