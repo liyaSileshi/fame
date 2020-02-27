@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import Slider from './Slider'
 class Editor extends Component {
     constructor(props) {
       super(props)
@@ -9,13 +9,23 @@ class Editor extends Component {
         blur: 0,
         grayscale: 0,
         contrast: 100,
-        opacity: 100
+        opacity: 100,
+        brightness: 100,
+        invert: 0,
+        sepia: 0,
+        saturate: 100
+        // rotate: 0
       }
     }
 
     render() {
       const filterStyle = {
-        filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px) grayscale(${this.state.grayscale}%) contrast(${this.state.contrast}%)`
+        filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px) 
+        grayscale(${this.state.grayscale}%) contrast(${this.state.contrast}%)
+        opacity(${this.state.opacity}%) brightness(${this.state.brightness}%)
+        invert(${this.state.invert}%) sepia(${this.state.sepia}%)
+        saturate(${this.state.saturate}%)`,
+        transform: `rotate(45deg)`
       }
 
       return (
@@ -29,7 +39,7 @@ class Editor extends Component {
           />
 
           <span>Hue: {this.state.hue}</span>
-          <input 
+          <Slider
             min="0"
             max="360"
             type="range"
@@ -40,7 +50,7 @@ class Editor extends Component {
           />
 
           <span>Blur: {this.state.blur}</span>
-          <input 
+          <Slider 
             min="0"
             max="10"
             type="range"
@@ -51,7 +61,7 @@ class Editor extends Component {
           />
 
           <span>Grayscale: {this.state.grayscale}</span>
-          <input 
+          <Slider 
             min="0"
             max="100"
             type="range"
@@ -62,7 +72,7 @@ class Editor extends Component {
           />
 
           <span>Contrast: {this.state.contrast}</span>
-          <input 
+          <Slider 
             min="0"
             max="200"
             type="range"
@@ -73,13 +83,57 @@ class Editor extends Component {
           />
 
           <span>Opacity: {this.state.opacity}</span>
-          <input 
+          <Slider 
             min="0"
             max="100"
             type="range"
             value={this.state.opacity}
             onChange={(e) => {
               this.setState({ opacity: e.target.value })
+            }}
+          />
+
+          <span>Brightness: {this.state.brightness}</span>
+          <Slider 
+            min="0"
+            max="200"
+            type="range"
+            value={this.state.brightness}
+            onChange={(e) => {
+              this.setState({ brightness: e.target.value })
+            }}
+          />
+
+          <span>Invert: {this.state.invert}</span>
+          <Slider 
+            min="0"
+            max="100"
+            type="range"
+            value={this.state.invert}
+            onChange={(e) => {
+              this.setState({ invert: e.target.value })
+            }}
+          />
+
+          <span>Sepia: {this.state.sepia}</span>
+          <Slider 
+            min="0"
+            max="100"
+            type="range"
+            value={this.state.sepia}
+            onChange={(e) => {
+              this.setState({ sepia: e.target.value })
+            }}
+          />
+
+          <span>Saturate: {this.state.saturate}</span>
+          <Slider 
+            min="0"
+            max="200"
+            type="range"
+            value={this.state.saturate}
+            onChange={(e) => {
+              this.setState({ saturate: e.target.value })
             }}
           />
 
