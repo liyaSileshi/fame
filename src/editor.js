@@ -136,7 +136,6 @@ class Editor extends Component {
               this.setState({ saturate: e.target.value })
             }}
           />
-
         </div>
       )
     }
