@@ -13,9 +13,29 @@ class Editor extends Component {
         brightness: 100,
         invert: 0,
         sepia: 0,
-        saturate: 100
+        saturate: 100,
+        selectedFile: null,
+        imagePreviewUrl: null
         // rotate: 0
       }
+      
+    }
+
+    fileChangedHandler = event => {
+      this.setState({
+        selectedFile: event.target.files[0]
+      })
+   
+      let reader = new FileReader();
+       
+      reader.onloadend = () => {
+        this.setState({
+          imagePreviewUrl: reader.result
+        });
+      }
+   
+      reader.readAsDataURL(event.target.files[0])
+   
     }
 
     render() {
@@ -25,18 +45,27 @@ class Editor extends Component {
         opacity(${this.state.opacity}%) brightness(${this.state.brightness}%)
         invert(${this.state.invert}%) sepia(${this.state.sepia}%)
         saturate(${this.state.saturate}%)`,
-        transform: `rotate(45deg)`
+        transform: `rotate(0deg)`
       }
 
+      let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
+    if (this.state.imagePreviewUrl) {
+      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}style={filterStyle}  alt="icon" width="200" /> </div>);
+    }
+
+      
       return (
         <div style={styles.container}>
-          <img 
-            src='images/liya.jpeg'
+          <input type="file" name="avatar" onChange={this.fileChangedHandler} />
+          {/* <img 
+            // src='images/liya.jpeg'
+
             width="500"
             height="auto"
             style={filterStyle}
             alt='enteredimg'
-          />
+          /> */}
+          {$imagePreview}
 
           <span>Hue: {this.state.hue}</span>
           <Slider
