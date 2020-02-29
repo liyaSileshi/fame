@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import Slider from './Slider'
+import { base64StringtoFile, extractImageFileExtensionFromBase64,
+        downloadBase64File } from './FileDownload'
+
 class Editor extends Component {
     constructor(props) {
       super(props)
-
       this.state = {
         hue: 0, 
         blur: 0,
@@ -33,9 +35,18 @@ class Editor extends Component {
           imagePreviewUrl: reader.result
         });
       }
-   
       reader.readAsDataURL(event.target.files[0])
    
+    }
+
+    // handles the download click event
+    handleDownloadClick = (event) => {
+      event.preventDefault();
+      const {imagePreviewUrl} = this.state
+      const fileExtension = extractImageFileExtensionFromBase64(imagePreviewUrl)
+      console.log(fileExtension)
+      const myFilename = 'previewFile.' + fileExtension
+      downloadBase64File(imagePreviewUrl, myFilename)
     }
 
     render() {
@@ -50,22 +61,16 @@ class Editor extends Component {
 
       let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
     if (this.state.imagePreviewUrl) {
-      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}style={filterStyle}  alt="icon" width="200" /> </div>);
+      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}style={filterStyle}  alt="icon" width="500" height='auto'/> </div>);
     }
 
       
       return (
         <div style={styles.container}>
           <input type="file" name="avatar" onChange={this.fileChangedHandler} />
-          {/* <img 
-            // src='images/liya.jpeg'
-
-            width="500"
-            height="auto"
-            style={filterStyle}
-            alt='enteredimg'
-          /> */}
-          {$imagePreview}
+          
+          {$imagePreview} {/*chosen image from file upload*/}
+          <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}
 
           <span>Hue: {this.state.hue}</span>
           <Slider
