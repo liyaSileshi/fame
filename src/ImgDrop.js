@@ -27,7 +27,8 @@ class ImgDrop extends Component {
   render() {
     let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
     if (this.state.imagePreviewUrl) {
-      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} alt="icon" width="200" /> </div>);
+      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}
+       alt="icon" width="200"/> </div>);
     }
  
     return (
