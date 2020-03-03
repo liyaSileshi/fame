@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Slider from './Slider'
 import { base64StringtoFile, extractImageFileExtensionFromBase64,
         downloadBase64File, image64toCanvasRef } from './FileDownload'
+import './editor.css'
 
 class Editor extends Component {
     constructor(props) {
@@ -29,16 +30,13 @@ class Editor extends Component {
       this.setState({
         selectedFile: event.target.files[0]
       })
-   
       let reader = new FileReader();
-       
       reader.onloadend = () => {
         this.setState({
           imagePreviewUrl: reader.result
         });
       }
       reader.readAsDataURL(event.target.files[0])
-   
     }
 
     // handles the download click event
@@ -59,7 +57,7 @@ class Editor extends Component {
       downloadBase64File(imageData64, myFilename)
     }
 
-    handleOnEditComplete = (event) => {
+    saveOnCanvas = (event) => {
       const canvasRef = this.imagePreviewCanvasRef.current
       const {imagePreviewUrl} = this.state
 
@@ -99,7 +97,7 @@ class Editor extends Component {
     // console.log(img)
     // console.log({$imagePreview})
       return (
-        <div style={styles.container}>
+        <div class='container'>
           <div>
             <input type="file" name="avatar" onChange={this.fileChangedHandler} />
             
@@ -108,7 +106,7 @@ class Editor extends Component {
             <canvas width="500" height="500" ref={this.imagePreviewCanvasRef}></canvas>
             
             <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}
-            <button onClick = {this.handleOnEditComplete}>Appear on canvas</button>
+            <button onClick = {this.saveOnCanvas}>Save</button>
           </div>
 
           <div>
@@ -211,7 +209,6 @@ class Editor extends Component {
               }}
             />
           </div>
-          
         </div>
       )
     }
@@ -223,12 +220,8 @@ const fontSize = 20
 const padding = 0.33
 
 const styles = {
-  container: {
-    display: 'flex',
-    flexDirection: 'row'
 
-  }, 
-  input: {
+   input: {
     padding: `${padding}em`,
     fontSize: `${fontSize}px`
   },

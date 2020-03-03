@@ -8,11 +8,11 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header"> */}
       {/* <ImgDrop /> */}
       <PageHeader />
       <Editor />
-      </header>
+      {/* </header> */}
     </div>
   );
 }
