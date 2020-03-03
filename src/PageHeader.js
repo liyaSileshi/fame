@@ -5,7 +5,7 @@ function PageHeader() {
     return (
         <div className='PageHeader'>
             <h1>
-                Image Editor
+                Photo Editor
             </h1>
         </div>
     )

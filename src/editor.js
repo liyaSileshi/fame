@@ -46,26 +46,28 @@ class Editor extends Component {
       event.preventDefault();
       const {imagePreviewUrl} = this.state
       const fileExtension = extractImageFileExtensionFromBase64(imagePreviewUrl)
-      // this.setState({
-      //   fileExtension: extractImageFileExtensionFromBase64(imagePreviewUrl)
-      // })
+      const canvasRef = this.imagePreviewCanvasRef.current
+      const imageData64 = canvasRef.toDataURL('image/'+fileExtension)
+
+
       console.log(imagePreviewUrl)
       const myFilename = 'previewFile.' + fileExtension
       // file to be uploaded
-      const myNewCroppedFile = base64StringtoFile(imagePreviewUrl, myFilename)
+      const myNewCroppedFile = base64StringtoFile(imageData64, myFilename)
       console.log(myNewCroppedFile)
       // download file
-      // downloadBase64File(imagePreviewUrl, myFilename)
+      downloadBase64File(imageData64, myFilename)
     }
 
     handleOnEditComplete = (event) => {
       const canvasRef = this.imagePreviewCanvasRef.current
       const {imagePreviewUrl} = this.state
-      image64toCanvasRef(canvasRef, imagePreviewUrl)
+
+      image64toCanvasRef(canvasRef, imagePreviewUrl, this.getFilterString())
     }
 
-    render() {
-      const filterStyle = {
+    getFilterStyle() {
+      return {
         filter: `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px) 
         grayscale(${this.state.grayscale}%) contrast(${this.state.contrast}%)
         opacity(${this.state.opacity}%) brightness(${this.state.brightness}%)
@@ -73,12 +75,24 @@ class Editor extends Component {
         saturate(${this.state.saturate}%)`,
         transform: `rotate(0deg)`
       }
+    }
+
+    getFilterString() {
+      return `hue-rotate(${this.state.hue}deg) blur(${this.state.blur}px) 
+        grayscale(${this.state.grayscale}%) contrast(${this.state.contrast}%)
+        opacity(${this.state.opacity}%) brightness(${this.state.brightness}%)
+        invert(${this.state.invert}%) sepia(${this.state.sepia}%)
+        saturate(${this.state.saturate}%)`  
+    }
+    
+    render() {
+      const filterStyle = this.getFilterStyle()
 
       let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
     if (this.state.imagePreviewUrl) {
       $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}style={filterStyle}
 
-      alt="icon" width="500" height='auto'/> </div>);
+      alt="icon" width="600" height='500'/> </div>);
     }
     // let img = this.state.imagePreviewUrl.toDataURL('image/')
     console.log('*****img********')
@@ -91,7 +105,7 @@ class Editor extends Component {
             
             {$imagePreview} {/*chosen image from file upload*/}
             <p>preview canvas</p>
-            <canvas ref={this.imagePreviewCanvasRef} width="500" height='auto'></canvas>
+            <canvas width="500" height="500" ref={this.imagePreviewCanvasRef}></canvas>
             
             <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}
             <button onClick = {this.handleOnEditComplete}>Appear on canvas</button>
@@ -212,6 +226,7 @@ const styles = {
   container: {
     display: 'flex',
     flexDirection: 'row'
+
   }, 
   input: {
     padding: `${padding}em`,

@@ -2,7 +2,7 @@ import Editor from './editor';
 import React, { Component } from 'react';
 import './App.css';
 import ImgDrop from './ImgDrop'
-
+import PageHeader from './PageHeader'
 
 function App() {
 
@@ -10,6 +10,7 @@ function App() {
     <div className="App">
       <header className="App-header">
       {/* <ImgDrop /> */}
+      <PageHeader />
       <Editor />
       </header>
     </div>
