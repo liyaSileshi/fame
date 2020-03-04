@@ -85,7 +85,6 @@ class Editor extends Component {
     
     render() {
       const filterStyle = this.getFilterStyle()
-
       let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
     if (this.state.imagePreviewUrl) {
       $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}style={filterStyle}
@@ -100,13 +99,11 @@ class Editor extends Component {
         <div class='container'>
           <div>
             <input type="file" name="avatar" onChange={this.fileChangedHandler} />
-            
             {$imagePreview} {/*chosen image from file upload*/}
-            <p>preview canvas</p>
             <canvas width="500" height="500" ref={this.imagePreviewCanvasRef}></canvas>
             
             <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}
-            <button onClick = {this.saveOnCanvas}>Save</button>
+            <button onClick = {this.saveOnCanvas}>Save</button> {/*saves image to canvas*/}
           </div>
 
           <div>
