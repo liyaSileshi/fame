@@ -92,19 +92,13 @@ class Editor extends Component {
       alt="icon" width="600" height='500'/> </div>);
     }
     // let img = this.state.imagePreviewUrl.toDataURL('image/')
-    console.log('*****img********')
-    // console.log(img)
-    // console.log({$imagePreview})
       return (
         <div>
           <div className='container'>
             <div>
-              <input type="file" name="avatar" onChange={this.fileChangedHandler} />
+              <input type="file" className='choosefile' name="avatar" onChange={this.fileChangedHandler} />
               {$imagePreview} {/*chosen image from file upload*/}
               <canvas width="500" height="500" ref={this.imagePreviewCanvasRef}></canvas>
-              
-              {/* <button onClick={this.handleDownloadClick}>Download</button> handles download button */}
-              {/* <button onClick = {this.saveOnCanvas}>Save</button>  */}
             </div>
 
             <div>
@@ -210,14 +204,11 @@ class Editor extends Component {
           </div>
 
         <div className='btn'>
-            <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}
-            <button onClick = {this.saveOnCanvas}>Save</button> 
+          <button onClick = {this.saveOnCanvas}>Save</button> 
+          <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}   
         </div>
 
       </div>
-        
-        
-        
       )
     }
 }
