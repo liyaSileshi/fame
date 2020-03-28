@@ -88,7 +88,7 @@ class Editor extends Component {
       const filterStyle = this.getFilterStyle()
       let $imagePreview = (<div className="previewText image-container">Please select an Image for Preview</div>);
     if (this.state.imagePreviewUrl) {
-      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl}style={filterStyle}
+      $imagePreview = (<div className="image-container" ><img src={this.state.imagePreviewUrl} style={filterStyle}
       alt="icon" width="600" height='500'/> </div>);
     }
     // let img = this.state.imagePreviewUrl.toDataURL('image/')
@@ -217,6 +217,7 @@ export default Editor
 
 const fontSize = 20
 const padding = 0.33
+
 
 const styles = {
 
