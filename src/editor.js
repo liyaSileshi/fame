@@ -23,7 +23,6 @@ class Editor extends Component {
         fileExtension: null
         // rotate: 0
       }
-      
     }
 
     fileChangedHandler = event => {
@@ -44,13 +43,10 @@ class Editor extends Component {
       event.preventDefault();
       const canvasRef = this.imagePreviewCanvasRef.current
       const {imagePreviewUrl} = this.state
-      // image64toCanvasRef(canvasRef, imagePreviewUrl, this.getFilterString())
 
       const fileExtension = extractImageFileExtensionFromBase64(imagePreviewUrl)
-      // const canvasRef = this.imagePreviewCanvasRef.current
       const imageData64 = canvasRef.toDataURL('image/'+fileExtension)
 
-      // console.log(imagePreviewUrl)
       const myFilename = 'previewFile.' + fileExtension
       // file to be uploaded
       const myNewCroppedFile = base64StringtoFile(imageData64, myFilename)
@@ -96,7 +92,12 @@ class Editor extends Component {
         <div>
           <div className='container'>
             <div>
-              <input type="file" className='choosefile' name="avatar" onChange={this.fileChangedHandler} />
+            <div className='btn'>
+            <input type="file" className='choosefile' name="avatar" onChange={this.fileChangedHandler} />
+              <button className='save' onClick = {this.saveOnCanvas}>Save</button> 
+              <button className="download" onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}   
+            </div>
+
               {$imagePreview} {/*chosen image from file upload*/}
               <canvas width="500" height="500" ref={this.imagePreviewCanvasRef}></canvas>
             </div>
@@ -202,35 +203,9 @@ class Editor extends Component {
               />
             </div>
           </div>
-
-        <div className='btn'>
-          <button onClick = {this.saveOnCanvas}>Save</button> 
-          <button onClick={this.handleDownloadClick}>Download</button> {/*handles download button*/}   
-        </div>
-
       </div>
       )
     }
 }
 
 export default Editor
-
-const fontSize = 20
-const padding = 0.33
-
-
-const styles = {
-
-   input: {
-    padding: `${padding}em`,
-    fontSize: `${fontSize}px`
-  },
-  output: {
-    fontSize: `${fontSize * 1.5}px`,
-    padding: `${padding}em`,
-    fontWeight: 'bold'
-  },
-  label: {
-    alignSelf: 'flex-start'
-  }
-}
