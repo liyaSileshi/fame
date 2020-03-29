@@ -8,10 +8,6 @@ Live link: 🔗 https://liyasileshi.github.io/image-editor/
 <img src='public/images/editornew.png' height='500' width='auto'>
 
 
-### Prerequisites
-
-- React
-
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
