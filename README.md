@@ -31,7 +31,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Quick Start
 
-Get up and running with TImage Editor app:
+Get up and running with Image Editor app:
 
 1. Once you have the repo cloned and met all the requirements above, start the
 packager that will transform your JS code on-the-fly:
